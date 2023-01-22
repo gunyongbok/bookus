@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { KAKAO_AUTH_URL } from '../OAuth';
 import { CgProfile } from 'react-icons/cg';
-import KakaoLoginImg from '../Image/kakao.png';
+import { BiBook } from 'react-icons/bi';
+import Table from '../components/Table';
 
 const TopContainer = styled.div`
     display: flex;
@@ -12,7 +12,6 @@ const TopContainer = styled.div`
 `;
 
 const Container = styled.div`
-    background-color: #e4e4e4;
     width: 1200px;
     height: 670px;
     position: relative;
@@ -30,13 +29,6 @@ const Header = styled.header`
     right: 15px;
 `;
 
-const Profile = styled.div`
-    font-size: 30px;
-    position: absolute;
-    right: 50px;
-    top: 50px;
-`;
-
 const Main = styled.div`
     background-color: white;
     width: 900px;
@@ -46,21 +38,32 @@ const Main = styled.div`
     top: 130px;
 `;
 
-const Image = styled.img.attrs({
-    src: `${KakaoLoginImg}`,
-})`
-    width: 200px;
-    height: 33px;
+const Library = styled.div`
+    width: 100%;
     position: relative;
-    top: 380px;
-    left: 350px;
+    left: 90px;
+    display: flex;
+    align-items: center;
+    height: 15%;
+    margin-left: 20px;
+    font-size: 18px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 `;
 
-const handleLogin = () => {
-    window.location.href = KAKAO_AUTH_URL;
-};
+const BookContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    height: 85%;
+`;
 
-const Login = () => {
+const Profile = styled.div`
+    font-size: 30px;
+    position: absolute;
+    right: 50px;
+    top: 50px;
+`;
+
+const Mylibrary = () => {
     return (
         <>
             <TopContainer>
@@ -70,7 +73,13 @@ const Login = () => {
                         <CgProfile />
                     </Profile>
                     <Main>
-                        <Image onClick={handleLogin}></Image>
+                        <Library>
+                            <BiBook />
+                            My library
+                        </Library>
+                        <BookContainer>
+                            <Table />
+                        </BookContainer>
                     </Main>
                 </Container>
             </TopContainer>
@@ -78,8 +87,4 @@ const Login = () => {
     );
 };
 
-export default Login;
-
-{
-    /* <button onClick={handleLogin}>Login</button> */
-}
+export default Mylibrary;

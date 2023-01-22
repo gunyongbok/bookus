@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { DEFAULT_SERVER_URL } from '../OAuth';
 
 const LoginResult = () => {
@@ -19,6 +19,7 @@ const LoginResult = () => {
     return (
         <>
             <button onClick={ApiCall}>login</button>
+            <Link to="/mylibrary">library</Link>
         </>
     );
 };
