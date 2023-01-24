@@ -4,6 +4,8 @@ import App from './App';
 import Mylibrary from './router/Mylibrary';
 import Login from './login/Login';
 import LoginResult from './login/LoginResult';
+import ReportList from './router/ReportList';
+import Search from './router/Search';
 
 const Router = createBrowserRouter([
     {
@@ -21,6 +23,14 @@ const Router = createBrowserRouter([
             {
                 path: 'mylibrary',
                 element: <Mylibrary />,
+            },
+            {
+                path: 'bookreportlist',
+                element: <ReportList />,
+            },
+            {
+                path: 'booksearch',
+                element: <Search />,
             },
         ],
     },

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 const TopTable = styled.table`
     position: relative;
@@ -40,7 +41,9 @@ const Table = () => {
                     <tr>
                         <Td>
                             <PlusBox>
-                                <AiOutlinePlusCircle />
+                                <Link to="/bookreportlist">
+                                    <AiOutlinePlusCircle />
+                                </Link>
                             </PlusBox>
                         </Td>
                         <Td>
