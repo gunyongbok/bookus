@@ -6,6 +6,7 @@ import Login from './login/Login';
 import LoginResult from './login/LoginResult';
 import ReportList from './router/ReportList';
 import Search from './router/Search';
+import BookList from './router/BookList';
 
 const Router = createBrowserRouter([
     {
@@ -14,15 +15,15 @@ const Router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Login />,
+                element: <Mylibrary />,
             },
             {
                 path: 'kakao',
                 element: <LoginResult />,
             },
             {
-                path: 'mylibrary',
-                element: <Mylibrary />,
+                path: 'login',
+                element: <Login />,
             },
             {
                 path: 'bookreportlist',
@@ -31,6 +32,10 @@ const Router = createBrowserRouter([
             {
                 path: 'booksearch',
                 element: <Search />,
+            },
+            {
+                path: 'booklist',
+                element: <BookList />,
             },
         ],
     },

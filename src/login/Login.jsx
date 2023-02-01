@@ -79,7 +79,3 @@ const Login = () => {
 };
 
 export default Login;
-
-{
-    /* <button onClick={handleLogin}>Login</button> */
-}

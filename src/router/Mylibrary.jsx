@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { CgProfile } from 'react-icons/cg';
 import { BiBook } from 'react-icons/bi';
 import Table from '../components/Table';
+import Modal from 'react-modal';
+import ModalPage from '../components/ModalPage';
 
 const TopContainer = styled.div`
     display: flex;
@@ -15,6 +17,7 @@ const Container = styled.div`
     width: 1200px;
     height: 670px;
     position: relative;
+    z-index: 1;
 `;
 
 const Header = styled.header`
@@ -64,14 +67,24 @@ const Profile = styled.div`
 `;
 
 const Mylibrary = () => {
+    const [modalHandle, setModalHandle] = useState(false);
+
+    const showModal = () => {
+        setModalHandle(true);
+    };
+
+    console.log(modalHandle);
+
     return (
         <>
             <TopContainer>
                 <Container>
-                    <Header>BOOKUS</Header>
+                    {modalHandle === true ? null : <Header>BOOKUS</Header>}
                     <Profile>
-                        <CgProfile />
+                        <CgProfile onClick={showModal} />
                     </Profile>
+                    {modalHandle && <ModalPage setModalHandle={setModalHandle} />}
+
                     <Main>
                         <Library>
                             <BiBook />

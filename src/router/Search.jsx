@@ -5,6 +5,8 @@ import { bookSearch } from '../components/api';
 import Item from '../components/Item';
 import { CgProfile } from 'react-icons/cg';
 import { AiOutlineLeft, AiOutlineRight, AiOutlineSearch } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
+import BookList from './BookList';
 
 const TopContainer = styled.div`
     display: flex;
