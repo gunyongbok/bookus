@@ -5,6 +5,9 @@ import { BiBook } from 'react-icons/bi';
 import Table from '../components/Table';
 import Modal from 'react-modal';
 import ModalPage from '../components/ModalPage';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { isLoginAtom } from '../atoms';
+import { Link, useNavigate } from 'react-router-dom';
 
 const TopContainer = styled.div`
     display: flex;
@@ -68,12 +71,24 @@ const Profile = styled.div`
 
 const Mylibrary = () => {
     const [modalHandle, setModalHandle] = useState(false);
+    const isLogin = useRecoilValue(isLoginAtom);
+    const setLogin = useSetRecoilState(isLoginAtom);
+    const navigate = useNavigate();
+    const userName = localStorage.getItem('userName');
+
+    const onClickProfile = () => {
+        navigate('/userprofile');
+    };
 
     const showModal = () => {
         setModalHandle(true);
     };
 
-    console.log(modalHandle);
+    if (userName !== null) {
+        setLogin(true);
+    }
+
+    console.log(isLogin);
 
     return (
         <>
@@ -81,7 +96,7 @@ const Mylibrary = () => {
                 <Container>
                     {modalHandle === true ? null : <Header>BOOKUS</Header>}
                     <Profile>
-                        <CgProfile onClick={showModal} />
+                        <CgProfile onClick={isLogin ? onClickProfile : showModal} />
                     </Profile>
                     {modalHandle && <ModalPage setModalHandle={setModalHandle} />}
 

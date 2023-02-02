@@ -7,6 +7,7 @@ import LoginResult from './login/LoginResult';
 import ReportList from './router/ReportList';
 import Search from './router/Search';
 import BookList from './router/BookList';
+import UserProfile from './router/UserProfile';
 
 const Router = createBrowserRouter([
     {
@@ -36,6 +37,10 @@ const Router = createBrowserRouter([
             {
                 path: 'booklist',
                 element: <BookList />,
+            },
+            {
+                path: 'userprofile',
+                element: <UserProfile />,
             },
         ],
     },
