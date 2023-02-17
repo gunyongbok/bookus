@@ -41,7 +41,7 @@ const Table = () => {
                     <tr>
                         <Td>
                             <PlusBox>
-                                <Link to="/bookreportlist">
+                                <Link to="/booksearch">
                                     <AiOutlinePlusCircle />
                                 </Link>
                             </PlusBox>

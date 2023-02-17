@@ -3,11 +3,10 @@ import styled from 'styled-components';
 import { CgProfile } from 'react-icons/cg';
 import { BiBook } from 'react-icons/bi';
 import Table from '../components/Table';
-import Modal from 'react-modal';
 import ModalPage from '../components/ModalPage';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { isLoginAtom } from '../atoms';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const TopContainer = styled.div`
     display: flex;

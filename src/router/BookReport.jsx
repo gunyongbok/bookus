@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { CgProfile } from 'react-icons/cg';
-import { Link } from 'react-router-dom';
 
 const TopContainer = styled.div`
     display: flex;
@@ -40,27 +39,21 @@ const Profile = styled.div`
 
 const Main = styled.div`
     background-color: white;
-    width: 750px;
+    width: 1100px;
     height: 480px;
     position: absolute;
-    left: 250px;
+
     top: 130px;
     display: flex;
 `;
 
 const BookInfo = styled.div`
-    width: 35%;
+    width: 20%;
     height: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-`;
-
-const BookReportListContainer = styled.div`
-    width: 60%;
-    height: 100%;
-    background-color: yellow;
 `;
 
 const BookTitleAuthor = styled.div`
@@ -69,9 +62,36 @@ const BookTitleAuthor = styled.div`
     border-bottom: 1px solid black;
 `;
 
-const BookList = (props) => {
-    const bookInfo = useLocation().state.books;
-    console.log(bookInfo);
+const BookReportListContainer = styled.div`
+    width: 75%;
+    height: 100%;
+`;
+
+const TitleInput = styled.input`
+    width: 100%;
+    height: 10%;
+    border: none;
+    border-bottom: 1px solid gray;
+    &::placeholder {
+        font-size: 20px;
+        font-weight: 500;
+    }
+`;
+
+const ContentsInput = styled.textarea`
+    width: 100%;
+    height: 85%;
+    border: none;
+    margin-top: 15px;
+    &::placeholder {
+        font-size: 10px;
+        font-weight: 400;
+    }
+`;
+
+const BookReport = () => {
+    const books = useLocation().state.book;
+    console.log(books);
     return (
         <>
             <TopContainer>
@@ -82,16 +102,15 @@ const BookList = (props) => {
                     </Profile>
                     <Main>
                         <BookInfo>
-                            <img src={bookInfo.thumbnail} alt={bookInfo.thumbnail} style={{ width: '155px', height: '230px' }} />
+                            <img src={books.thumbnail} alt={books.thumbnail} style={{ width: '135px', height: '190px' }} />
                             <BookTitleAuthor>
-                                <h3 style={{ fontSize: '15px', fontWeight: '700', marginBottom: '5px' }}>{bookInfo.title}</h3>
-                                <h4 style={{ fontSize: '10px', fontWeight: '400', margin: '0' }}>{bookInfo.authors}</h4>
+                                <h3 style={{ fontSize: '12px', fontWeight: '700', marginBottom: '5px' }}>{books.title}</h3>
+                                <h4 style={{ fontSize: '10px', fontWeight: '400', margin: '0' }}>{books.authors}</h4>
                             </BookTitleAuthor>
                         </BookInfo>
                         <BookReportListContainer>
-                            <Link to="/bookreport" state={{ book: bookInfo }}>
-                                Hi
-                            </Link>
+                            <TitleInput placeholder="제목을 입력하세요."></TitleInput>
+                            <ContentsInput placeholder="내용을 입력하세요."></ContentsInput>
                         </BookReportListContainer>
                     </Main>
                 </Container>
@@ -100,4 +119,4 @@ const BookList = (props) => {
     );
 };
 
-export default BookList;
+export default BookReport;

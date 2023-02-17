@@ -8,6 +8,7 @@ import ReportList from './router/ReportList';
 import Search from './router/Search';
 import BookList from './router/BookList';
 import UserProfile from './router/UserProfile';
+import BookReport from './router/BookReport';
 
 const Router = createBrowserRouter([
     {
@@ -26,10 +27,7 @@ const Router = createBrowserRouter([
                 path: 'login',
                 element: <Login />,
             },
-            {
-                path: 'bookreportlist',
-                element: <ReportList />,
-            },
+
             {
                 path: 'booksearch',
                 element: <Search />,
@@ -39,8 +37,15 @@ const Router = createBrowserRouter([
                 element: <BookList />,
             },
             {
+                path: 'bookreport',
+                element: <BookReport />,
+            },
+            {
                 path: 'userprofile',
                 element: <UserProfile />,
+            },
+            {
+                path: '',
             },
         ],
     },

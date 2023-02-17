@@ -130,8 +130,6 @@ const Search = (props) => {
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
 
-    console.log(page);
-
     const upPage = () => {
         bookSearchHttpHandler(query, true);
         setPage((prev) => prev + 1);
