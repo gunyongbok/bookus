@@ -211,8 +211,17 @@ const Search = (props) => {
                         </RightBtn>
                         <SearchContainer>
                             <Ul>
-                                {books?.map((a, i) => (
-                                    <Item key={i} title={a.title} thumbnail={a.thumbnail} authors={a.authors[0]} />
+                                {books?.map((book, i) => (
+                                    <Item
+                                        key={i}
+                                        title={book.title}
+                                        contents={book.contents}
+                                        isbn={book.isbn}
+                                        publisher={book.publisher}
+                                        thumbnail={book.thumbnail}
+                                        authors={book.authors[0]}
+                                        url={book.url}
+                                    />
                                 ))}
                             </Ul>
                         </SearchContainer>

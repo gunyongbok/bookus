@@ -1,6 +1,8 @@
+import axios from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { DEFAULT_SERVER_URL } from '../OAuth';
 
 const Li = styled.li`
     list-style: none;
@@ -34,9 +36,38 @@ const StyledLink = styled(Link)`
 `;
 
 const Item = (props) => {
-    console.log(props);
+    const handleSubmit = () => {
+        const accessTokenHeader = localStorage.getItem('accessToken');
+
+        const data = {
+            title: `${props.title}`,
+            contents: `${props.contents}`,
+            isbn: `${props.isbn}`,
+            publisher: `${props.publisher}`,
+            thumbnail: `${props.thumbnail}`,
+            authors: [`${props.authors}`],
+            url: `${props.url}`,
+        };
+
+        const headers = {
+            'Access-token': `${accessTokenHeader}`,
+        };
+
+        console.log(data);
+        console.log(headers);
+
+        axios
+            .post(`${DEFAULT_SERVER_URL}/api/v1/book`, data, { headers })
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     return (
-        <Li>
+        <Li onClick={handleSubmit}>
             <StyledLink to={'/booklist'} state={{ books: props }}>
                 <Container>
                     <ImgBox>

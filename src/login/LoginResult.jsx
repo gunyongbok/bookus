@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { DEFAULT_SERVER_URL } from '../OAuth';
+
 const Container = styled.div`
     width: 100%;
     height: 100%;
@@ -111,15 +112,15 @@ const LoginResult = () => {
 
     const userName = localStorage.getItem('userName');
 
+    console.log(userName);
+
     return (
         <>
             <Container>
                 <Main>
                     <Header>BOOKUS</Header>
                     <WelcomeUser>
-                        <FirstLRow style={{ display: 'flex' }}>
-                            <UserName>'{userName}'</UserName>님 환영합니다
-                        </FirstLRow>
+                        <FirstLRow style={{ display: 'flex' }}>환영합니다</FirstLRow>
                         <SecondLRow>북커스와 함께 독서 과정을 기록해보세요.</SecondLRow>
                         <StyledLink to="/">
                             <RollIn>시작하기</RollIn>

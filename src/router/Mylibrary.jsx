@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { CgProfile } from 'react-icons/cg';
 import { BiBook } from 'react-icons/bi';
@@ -7,6 +7,8 @@ import ModalPage from '../components/ModalPage';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { isLoginAtom } from '../atoms';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { DEFAULT_SERVER_URL } from '../OAuth';
 
 const TopContainer = styled.div`
     display: flex;
@@ -69,6 +71,7 @@ const Profile = styled.div`
 `;
 
 const Mylibrary = () => {
+    const [data, setData] = useState([]);
     const [modalHandle, setModalHandle] = useState(false);
     const isLogin = useRecoilValue(isLoginAtom);
     const setLogin = useSetRecoilState(isLoginAtom);
@@ -89,9 +92,36 @@ const Mylibrary = () => {
 
     console.log(isLogin);
 
+    const RemoveHangler = () => {
+        window.localStorage.removeItem('accessToken');
+        window.localStorage.removeItem('refreshToken');
+        window.localStorage.removeItem('userId');
+        window.localStorage.removeItem('userName');
+        window.location.reload();
+    };
+
+    useEffect(() => {
+        const accessTokenHeader = localStorage.getItem('accessToken');
+
+        axios
+            .get(`${DEFAULT_SERVER_URL}/api/v1/report`, {
+                headers: {
+                    'Access-token': `${accessTokenHeader}`,
+                },
+            })
+            .then((response) => {
+                setData(response);
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
     return (
         <>
             <TopContainer>
+                <button onClick={RemoveHangler}>logout</button>
                 <Container>
                     {modalHandle === true ? null : <Header>BOOKUS</Header>}
                     <Profile>

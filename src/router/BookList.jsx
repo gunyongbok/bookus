@@ -71,7 +71,7 @@ const BookTitleAuthor = styled.div`
 
 const BookList = (props) => {
     const bookInfo = useLocation().state.books;
-    console.log(bookInfo);
+
     return (
         <>
             <TopContainer>
