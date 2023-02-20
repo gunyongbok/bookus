@@ -198,8 +198,8 @@ const BookReport = () => {
                         <BookInfo>
                             <img src={books.thumbnail} alt={books.thumbnail} style={{ width: '145px', height: '190px' }} />
                             <BookTitleAuthor>
-                                <h3 style={{ fontSize: '12px', fontWeight: '700', marginBottom: '5px' }}>{books.title}</h3>
-                                <h4 style={{ fontSize: '10px', fontWeight: '400', margin: '0' }}>{books.authors}</h4>
+                                <h3 style={{ fontSize: '14px', fontWeight: '700', marginBottom: '5px' }}>{books.title}</h3>
+                                <h4 style={{ fontSize: '12px', fontWeight: '400', margin: '0' }}>{books.authors}</h4>
                                 <PageReportContainer>
                                     Page
                                     <StartPage placeholder="000" />-<EndPage placeholder="000" /> p

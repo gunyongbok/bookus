@@ -1,7 +1,7 @@
-import { useLocation } from 'react-router-dom';
-import styled from 'styled-components';
+import React from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
-import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const TopContainer = styled.div`
     display: flex;
@@ -77,8 +77,9 @@ const ImgBox = styled.div`
     box-shadow: rgba(0, 0, 0, 0.35) -4px 5px 15px;
 `;
 
-const BookList = (props) => {
-    const bookInfo = useLocation().state.books;
+const Storage = () => {
+    const { state } = useLocation();
+    const { id } = useParams();
 
     return (
         <>
@@ -91,18 +92,15 @@ const BookList = (props) => {
                     <Main>
                         <BookInfo>
                             <ImgBox>
-                                <img src={bookInfo.thumbnail} alt={bookInfo.thumbnail} style={{ width: '205px', height: '300px' }} />
+                                <img src={state.thumbnail} alt={state.thumbnail} style={{ width: '205px', height: '300px' }} />
                             </ImgBox>
+
                             <BookTitleAuthor>
-                                <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '5px' }}>{bookInfo.title}</h3>
-                                <h4 style={{ fontSize: '15px', fontWeight: '400', margin: '0' }}>{bookInfo.authors}</h4>
+                                <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '5px' }}>{state.title}</h3>
+                                <h4 style={{ fontSize: '15px', fontWeight: '400', margin: '0' }}>{state.author[0]}</h4>
                             </BookTitleAuthor>
                         </BookInfo>
-                        <BookReportListContainer>
-                            <Link to="/bookreport" state={{ book: bookInfo }}>
-                                Hi
-                            </Link>
-                        </BookReportListContainer>
+                        <BookReportListContainer></BookReportListContainer>
                     </Main>
                 </Container>
             </TopContainer>
@@ -110,4 +108,4 @@ const BookList = (props) => {
     );
 };
 
-export default BookList;
+export default Storage;

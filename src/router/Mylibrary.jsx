@@ -186,7 +186,12 @@ const Mylibrary = () => {
                         <BookContainer>
                             <BookUl>
                                 {bookData?.map((data) => (
-                                    <BookLi key={data.bookId}>
+                                    <BookLi
+                                        onClick={() => {
+                                            navigate(`bookreportstorage/${data.bookId}`, { state: data });
+                                        }}
+                                        key={data.bookId}
+                                    >
                                         <img src={data.thumbnail} />
                                         <p style={{ fontSize: '13px' }}>{data.title}</p>
                                     </BookLi>
