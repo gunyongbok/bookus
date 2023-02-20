@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { AiOutlinePlus } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
 import { BiBook } from 'react-icons/bi';
-import Table from '../components/Table';
 import ModalPage from '../components/ModalPage';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { isLoginAtom } from '../atoms';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { DEFAULT_SERVER_URL } from '../OAuth';
 
@@ -48,7 +48,8 @@ const Main = styled.div`
 const Library = styled.div`
     width: 100%;
     position: relative;
-    left: 90px;
+    left: 60px;
+    top: -10px;
     display: flex;
     align-items: center;
     height: 15%;
@@ -70,8 +71,53 @@ const Profile = styled.div`
     top: 50px;
 `;
 
+const BookUl = styled.ul`
+    display: flex;
+    position: relative;
+    bottom: 20px;
+    width: 100%;
+    height: 120%;
+    flex-wrap: wrap;
+`;
+
+const BookLi = styled.li`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 18%;
+    height: 45%;
+    list-style: none;
+    border-bottom: 2px solid black;
+    margin-left: 2%;
+`;
+
+const PlusLi = styled.li`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 18%;
+    height: 45%;
+    list-style: none;
+    border-bottom: 2px solid rgba(160, 160, 160, 0.65);
+    margin-left: 2%;
+`;
+
+const PlusBox = styled.div`
+    width: 120px;
+    height: 174px;
+    position: relative;
+    top: -18px;
+    background-color: #e4e4e4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+`;
+
 const Mylibrary = () => {
-    const [data, setData] = useState([]);
+    const [info, setInfo] = useState([]);
     const [modalHandle, setModalHandle] = useState(false);
     const isLogin = useRecoilValue(isLoginAtom);
     const setLogin = useSetRecoilState(isLoginAtom);
@@ -110,13 +156,16 @@ const Mylibrary = () => {
                 },
             })
             .then((response) => {
-                setData(response);
-                console.log(response);
+                setInfo(response);
+                console.log(response.data.result);
             })
             .catch((error) => {
                 console.log(error);
             });
     }, []);
+
+    const bookData = info.data?.result;
+    console.log(bookData);
 
     return (
         <>
@@ -135,7 +184,21 @@ const Mylibrary = () => {
                             My library
                         </Library>
                         <BookContainer>
-                            <Table />
+                            <BookUl>
+                                {bookData?.map((data) => (
+                                    <BookLi key={data.bookId}>
+                                        <img src={data.thumbnail} />
+                                        <p style={{ fontSize: '13px' }}>{data.title}</p>
+                                    </BookLi>
+                                ))}
+                                <PlusLi>
+                                    <PlusBox>
+                                        <Link to="/booksearch">
+                                            <AiOutlinePlus />
+                                        </Link>
+                                    </PlusBox>
+                                </PlusLi>
+                            </BookUl>
                         </BookContainer>
                     </Main>
                 </Container>
