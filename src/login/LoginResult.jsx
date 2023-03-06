@@ -107,11 +107,7 @@ const LoginResult = () => {
 
     useEffect(() => {
         ApiCall();
-    }, []);
-
-    const userName = localStorage.getItem('userName');
-
-    console.log(userName);
+    }, [ApiCall]);
 
     return (
         <>

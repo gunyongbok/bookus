@@ -200,7 +200,7 @@ const Mylibrary = () => {
                                         }}
                                         key={data.bookId}
                                     >
-                                        <img src={data.thumbnail} />
+                                        <img alt="thumbnail" src={data.thumbnail} />
                                         <p style={{ fontSize: '13px' }}>{data.title}</p>
                                     </BookLi>
                                 ))}

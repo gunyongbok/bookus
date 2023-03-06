@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { CgProfile } from 'react-icons/cg';
 import { BsList } from 'react-icons/bs';
@@ -186,11 +186,11 @@ const FooterBar = styled.footer`
 const BookReport = () => {
     const books = useLocation().state.book;
     // console.log(books);
-    const [contents, setContents] = useState('');
-    const [date, setdate] = useState('');
-    const [startPage, setStartPage] = useState(0);
-    const [endPage, setEndPage] = useState(0);
-    const [title, setTitle] = useState('');
+    // const [contents, setContents] = useState('');
+    // const [date, setdate] = useState('');
+    // const [startPage, setStartPage] = useState(0);
+    // const [endPage, setEndPage] = useState(0);
+    // const [title, setTitle] = useState('');
 
     return (
         <>
