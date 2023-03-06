@@ -2,7 +2,6 @@ import axios from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { DEFAULT_SERVER_URL } from '../OAuth';
 
 const Li = styled.li`
     list-style: none;
@@ -57,7 +56,7 @@ const Item = (props) => {
         console.log(headers);
 
         axios
-            .post(`${DEFAULT_SERVER_URL}/api/v1/book`, data, { headers })
+            .post(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/book`, data, { headers })
             .then((response) => {
                 console.log(response);
             })

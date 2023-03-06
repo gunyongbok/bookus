@@ -8,7 +8,6 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { isLoginAtom } from '../atoms';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { DEFAULT_SERVER_URL } from '../OAuth';
 
 const TopContainer = styled.div`
     display: flex;
@@ -157,7 +156,7 @@ const Mylibrary = () => {
         const accessTokenHeader = localStorage.getItem('accessToken');
 
         axios
-            .get(`${DEFAULT_SERVER_URL}/api/v1/report`, {
+            .get(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/report`, {
                 headers: {
                     'Access-token': `${accessTokenHeader}`,
                 },

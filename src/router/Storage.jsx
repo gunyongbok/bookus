@@ -3,7 +3,6 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
 import styled from 'styled-components';
 import axios from 'axios';
-import { DEFAULT_SERVER_URL } from '../OAuth';
 
 const TopContainer = styled.div`
     display: flex;
@@ -107,7 +106,7 @@ const Storage = () => {
             },
         };
         axios
-            .put(`${DEFAULT_SERVER_URL}/api/v1/report/book/${id}`, id, options)
+            .put(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/report/book/${id}`, id, options)
             .then((response) => {
                 console.log(response);
             })

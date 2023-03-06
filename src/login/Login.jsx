@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { KAKAO_AUTH_URL } from '../OAuth';
 import { CgProfile } from 'react-icons/cg';
 import KakaoLoginImg from '../Image/kakao.png';
 
@@ -57,7 +56,7 @@ const Image = styled.img.attrs({
 `;
 
 const handleLogin = () => {
-    window.location.href = KAKAO_AUTH_URL;
+    window.location.href = process.env.REACT_APP_KAKAO_AUTH_URL;
 };
 
 const Login = () => {

@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { DEFAULT_SERVER_URL } from '../OAuth';
 
 const Container = styled.div`
     width: 100%;
@@ -94,7 +93,7 @@ const LoginResult = () => {
 
     const ApiCall = async () => {
         try {
-            const response = await axios.get(`${DEFAULT_SERVER_URL}/api/v1/oauth/kakao/authorization?code=${code}`);
+            const response = await axios.get(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/oauth/kakao/authorization?code=${code}`);
             console.log('response >>', response);
 
             localStorage.setItem('userId', response.data.result.userId);
