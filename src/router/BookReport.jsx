@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { CgProfile } from 'react-icons/cg';
@@ -39,7 +39,7 @@ const Profile = styled.div`
     top: 30px;
 `;
 
-const Main = styled.div`
+const Main = styled.form`
     background-color: white;
     width: 1100px;
     height: 480px;
@@ -115,7 +115,6 @@ const TitleInput = styled.input`
     width: 88%;
     height: 10%;
     border: none;
-    border-bottom: 1px solid gray;
     font-size: 25px;
     font-weight: 600;
     &::placeholder,
@@ -146,23 +145,22 @@ const DateLabel = styled.label`
     width: 5%;
     height: 10%;
     border: none;
-    border-bottom: 1px solid gray;
     font-size: 15px;
     font-weight: 600;
     position: relative;
     top: 12px;
+    left: -5px;
 `;
 
 const DateInput = styled.input`
     padding-bottom: 6px;
-    width: 9%;
+    width: 20%;
     height: 10%;
     border: none;
-    border-bottom: 1px solid gray;
     font-size: 15px;
     font-weight: 300;
     position: relative;
-    top: 11px;
+    top: 8px;
     &::placeholder,
     :focus {
         font-size: 15px;
@@ -173,6 +171,8 @@ const DateInput = styled.input`
 
 const InputContainer = styled.div`
     display: flex;
+    width: 100%;
+    border-bottom: 1px solid gray;
 `;
 
 const FooterBar = styled.footer`
@@ -185,7 +185,13 @@ const FooterBar = styled.footer`
 
 const BookReport = () => {
     const books = useLocation().state.book;
-    console.log(books);
+    // console.log(books);
+    const [contents, setContents] = useState('');
+    const [date, setdate] = useState('');
+    const [startPage, setStartPage] = useState(0);
+    const [endPage, setEndPage] = useState(0);
+    const [title, setTitle] = useState('');
+
     return (
         <>
             <TopContainer>
@@ -209,8 +215,8 @@ const BookReport = () => {
                         <BookReportListContainer>
                             <InputContainer>
                                 <TitleInput placeholder="제목을 입력하세요."></TitleInput>
-                                <DateLabel for="date">Date</DateLabel>
-                                <DateInput id="date" placeholder="00. 00. 00"></DateInput>
+                                <DateLabel htmlFor="date">Date</DateLabel>
+                                <DateInput id="date" type="date"></DateInput>
                             </InputContainer>
                             <ContentsInput placeholder="내용을 입력하세요."></ContentsInput>
                             <FooterBar>

@@ -12,6 +12,8 @@ import { DEFAULT_SERVER_URL } from '../OAuth';
 
 const TopContainer = styled.div`
     display: flex;
+    position: relative;
+    top: -30px;
     height: 100vh;
     justify-content: center;
     align-items: center;
@@ -78,6 +80,9 @@ const BookUl = styled.ul`
     width: 100%;
     height: 120%;
     flex-wrap: wrap;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `;
 
 const BookLi = styled.li`
@@ -90,6 +95,7 @@ const BookLi = styled.li`
     list-style: none;
     border-bottom: 2px solid black;
     margin-left: 2%;
+    padding-top: 15px;
 `;
 
 const PlusLi = styled.li`
@@ -102,6 +108,7 @@ const PlusLi = styled.li`
     list-style: none;
     border-bottom: 2px solid rgba(160, 160, 160, 0.65);
     margin-left: 2%;
+    padding-top: 15px;
 `;
 
 const PlusBox = styled.div`
@@ -162,6 +169,8 @@ const Mylibrary = () => {
             .catch((error) => {
                 console.log(error);
             });
+
+        // window.location.reload();
     }, []);
 
     const bookData = info.data?.result;

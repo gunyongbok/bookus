@@ -95,7 +95,7 @@ const BookList = (props) => {
                             </ImgBox>
                             <BookTitleAuthor>
                                 <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '5px' }}>{bookInfo.title}</h3>
-                                <h4 style={{ fontSize: '15px', fontWeight: '400', margin: '0' }}>{bookInfo.authors}</h4>
+                                <h4 style={{ fontSize: '12px', fontWeight: '400', margin: '0' }}>{bookInfo.authors}</h4>
                             </BookTitleAuthor>
                         </BookInfo>
                         <BookReportListContainer>

@@ -1,7 +1,9 @@
 import React from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
 import styled from 'styled-components';
+import axios from 'axios';
+import { DEFAULT_SERVER_URL } from '../OAuth';
 
 const TopContainer = styled.div`
     display: flex;
@@ -77,9 +79,46 @@ const ImgBox = styled.div`
     box-shadow: rgba(0, 0, 0, 0.35) -4px 5px 15px;
 `;
 
+const DeleteContainer = styled.div`
+    display: flex;
+    position: relative;
+    top: -20px;
+    left: 60px;
+    color: #6e6e6e;
+`;
+
+const DeleteBox = styled.div`
+    font-size: 13px;
+    position: relative;
+    top: 3px;
+    left: 5px;
+`;
+
 const Storage = () => {
     const { state } = useLocation();
     const { id } = useParams();
+    const navigate = useNavigate();
+
+    const handleDelete = () => {
+        const accessTokenHeader = localStorage.getItem('accessToken');
+        const options = {
+            headers: {
+                'Access-token': `${accessTokenHeader}`,
+            },
+        };
+        axios
+            .put(`${DEFAULT_SERVER_URL}/api/v1/report/book/${id}`, id, options)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        navigate('/');
+    };
+
+    console.log(id);
 
     return (
         <>
@@ -90,6 +129,9 @@ const Storage = () => {
                         <CgProfile />
                     </Profile>
                     <Main>
+                        <DeleteContainer onClick={handleDelete}>
+                            x <DeleteBox>Delete</DeleteBox>
+                        </DeleteContainer>
                         <BookInfo>
                             <ImgBox>
                                 <img src={state.thumbnail} alt={state.thumbnail} style={{ width: '205px', height: '300px' }} />
@@ -97,7 +139,7 @@ const Storage = () => {
 
                             <BookTitleAuthor>
                                 <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '5px' }}>{state.title}</h3>
-                                <h4 style={{ fontSize: '15px', fontWeight: '400', margin: '0' }}>{state.author[0]}</h4>
+                                <h4 style={{ fontSize: '12px', fontWeight: '400', margin: '0' }}>{state.author[0]}</h4>
                             </BookTitleAuthor>
                         </BookInfo>
                         <BookReportListContainer></BookReportListContainer>
