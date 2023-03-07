@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -41,11 +41,6 @@ const Header = styled.header`
 
 const WelcomeUser = styled.div`
     width: 100%;
-`;
-
-const UserName = styled.h3`
-    font-weight: 600;
-    font-size: 13px;
 `;
 
 const FirstLRow = styled.div`
@@ -91,23 +86,23 @@ const LoginResult = () => {
     const location = useLocation();
     const code = location.search.split('=')[1];
 
-    const ApiCall = async () => {
-        try {
-            const response = await axios.get(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/oauth/kakao/authorization?code=${code}`);
-            console.log('response >>', response);
-
-            localStorage.setItem('userId', response.data.result.userId);
-            localStorage.setItem('userName', response.data.result.userName);
-            localStorage.setItem('accessToken', response.data.result.accessToken);
-            localStorage.setItem('refreshToken', response.data.result.refreshToken);
-        } catch (err) {
-            console.log('Error >>', err);
-        }
-    };
-
     useEffect(() => {
+        const ApiCall = async () => {
+            try {
+                const response = await axios.get(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/oauth/kakao/authorization?code=${code}`);
+                console.log('response >>', response);
+
+                localStorage.setItem('userId', response.data.result.userId);
+                localStorage.setItem('userName', response.data.result.userName);
+                localStorage.setItem('accessToken', response.data.result.accessToken);
+                localStorage.setItem('refreshToken', response.data.result.refreshToken);
+            } catch (err) {
+                console.log('Error >>', err);
+            }
+        };
+
         ApiCall();
-    }, [ApiCall]);
+    }, []);
 
     return (
         <>
