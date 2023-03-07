@@ -149,12 +149,6 @@ const Search = (props) => {
         setText(e.target.value);
     };
 
-    useEffect(() => {
-        if (query.length > 0) {
-            bookSearchHttpHandler(query, true);
-        }
-    }, [query]);
-
     // book search 핸들러
     const bookSearchHttpHandler = async (query, reset) => {
         // paramter 설정
@@ -173,6 +167,12 @@ const Search = (props) => {
         } // api 호출
         console.log(data);
     };
+
+    useEffect(() => {
+        if (query.length > 0) {
+            bookSearchHttpHandler(query, true);
+        }
+    }, [query]);
 
     return (
         <>
