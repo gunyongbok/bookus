@@ -84,9 +84,9 @@ const StyledLink = styled(Link)`
 
 const LoginResult = () => {
     const location = useLocation();
+    const code = location.search.split('=')[1];
 
     useEffect(() => {
-        const code = location.search.split('=')[1];
         const ApiCall = async () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/oauth/kakao/authorization?code=${code}`);
@@ -102,7 +102,7 @@ const LoginResult = () => {
         };
 
         ApiCall();
-    }, []);
+    }, [code]);
 
     return (
         <>
