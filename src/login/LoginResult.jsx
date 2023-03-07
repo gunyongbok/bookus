@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -84,9 +84,9 @@ const StyledLink = styled(Link)`
 
 const LoginResult = () => {
     const location = useLocation();
-    const code = location.search.split('=')[1];
 
     useEffect(() => {
+        const code = location.search.split('=')[1];
         const ApiCall = async () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/oauth/kakao/authorization?code=${code}`);
