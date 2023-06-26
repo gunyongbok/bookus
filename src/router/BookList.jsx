@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { CgProfile } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
+import profileLoginImg from '../Image/profile.png';
 
 const TopContainer = styled.div`
     display: flex;
@@ -90,7 +90,7 @@ const BookList = (props) => {
                 <Container>
                     <Header>BOOKUS</Header>
                     <Profile>
-                        <CgProfile />
+                        <img src={profileLoginImg} alt="profile" style={{ width: '35px' }} />
                     </Profile>
                     <Main>
                         <BookInfo>

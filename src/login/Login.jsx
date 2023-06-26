@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CgProfile } from 'react-icons/cg';
 import KakaoLoginImg from '../Image/kakao.png';
+import profileLoginImg from '../Image/profile.png';
 
 const TopContainer = styled.div`
     display: flex;
@@ -66,7 +66,7 @@ const Login = () => {
                 <Container>
                     <Header>BOOKUS</Header>
                     <Profile>
-                        <CgProfile />
+                        <img src={profileLoginImg} alt="profile" style={{ width: '35px' }} />
                     </Profile>
                     <Main>
                         <Image onClick={handleLogin}></Image>

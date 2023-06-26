@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { CgProfile } from 'react-icons/cg';
 import { BsList } from 'react-icons/bs';
 import { AiOutlineSave } from 'react-icons/ai';
+import profileLoginImg from '../Image/profile.png';
 
 const TopContainer = styled.div`
     display: flex;
@@ -198,7 +198,7 @@ const BookReport = () => {
                 <Container>
                     <Header>BOOKUS</Header>
                     <Profile>
-                        <CgProfile />
+                        <img src={profileLoginImg} alt="profile" style={{ width: '35px' }} />
                     </Profile>
                     <Main>
                         <BookInfo>

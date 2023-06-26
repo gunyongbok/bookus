@@ -5,6 +5,7 @@ import { bookSearch } from '../components/api';
 import Item from '../components/Item';
 import { CgProfile } from 'react-icons/cg';
 import { AiOutlineLeft, AiOutlineRight, AiOutlineSearch } from 'react-icons/ai';
+import profileLoginImg from '../Image/profile.png';
 
 const TopContainer = styled.div`
     display: flex;
@@ -35,8 +36,8 @@ const Header = styled.header`
 const Profile = styled.div`
     font-size: 30px;
     position: absolute;
-    right: 50px;
-    top: 50px;
+    right: 30px;
+    top: 60px;
 `;
 
 const Main = styled.div`
@@ -180,7 +181,7 @@ const Search = (props) => {
                 <Container>
                     <Header>BOOKUS</Header>
                     <Profile>
-                        <CgProfile />
+                        <img src={profileLoginImg} alt="profile" style={{ width: '35px' }} />
                     </Profile>
                     <Main>
                         <XBtn>x</XBtn>
