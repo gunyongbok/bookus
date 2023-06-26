@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import KakaoLoginImg from '../Image/kakao.png';
-import profileLoginImg from '../Image/profile.png';
+import profileLoginImg from '../Image/Profile.png';
 
 const TopContainer = styled.div`
     display: flex;

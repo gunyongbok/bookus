@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { BsList } from 'react-icons/bs';
 import { AiOutlineSave } from 'react-icons/ai';
-import profileLoginImg from '../Image/profile.png';
+import profileLoginImg from '../Image/Profile.png';
 
 const TopContainer = styled.div`
     display: flex;

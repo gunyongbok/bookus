@@ -3,9 +3,8 @@ import { useEffect } from 'react';
 import styled from 'styled-components';
 import { bookSearch } from '../components/api';
 import Item from '../components/Item';
-import { CgProfile } from 'react-icons/cg';
 import { AiOutlineLeft, AiOutlineRight, AiOutlineSearch } from 'react-icons/ai';
-import profileLoginImg from '../Image/profile.png';
+import profileLoginImg from '../Image/Profile.png';
 
 const TopContainer = styled.div`
     display: flex;

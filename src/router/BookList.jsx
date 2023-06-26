@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import profileLoginImg from '../Image/profile.png';
+import profileLoginImg from '../Image/Profile.png';
 
 const TopContainer = styled.div`
     display: flex;
@@ -62,11 +62,29 @@ const BookInfo = styled.div`
 const BookReportListContainer = styled.div`
     width: 73%;
     height: 100%;
-    background-color: #e8e5e5;
     border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+`;
+
+const BookReportTitle = styled.div`
+    width: 100%;
+    height: 8%;
+    border-bottom: 2px solid black;
+    position: absolute;
+    top: 0;
+    display: flex;
+`;
+
+const TitleDetails = styled.div`
+    height: 100%;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 700;
 `;
 
 const BookTitleAuthor = styled.div`
@@ -103,8 +121,14 @@ const BookList = (props) => {
                             </BookTitleAuthor>
                         </BookInfo>
                         <BookReportListContainer>
+                            <BookReportTitle>
+                                <TitleDetails>Page</TitleDetails>
+                                <TitleDetails>Date</TitleDetails>
+                                <TitleDetails>Title</TitleDetails>
+                                <TitleDetails>Text</TitleDetails>
+                            </BookReportTitle>
                             <Link to="/bookreport" state={{ book: bookInfo }}>
-                                독서록 작성하기
+                                독서록 작성하기(이 부분 리스트로 표현될 예정)
                             </Link>
                         </BookReportListContainer>
                     </Main>

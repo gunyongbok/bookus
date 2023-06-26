@@ -7,7 +7,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { isLoginAtom } from '../atoms';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import profileLoginImg from '../Image/profile.png';
+import profileLoginImg from '../Image/Profile.png';
 
 const TopContainer = styled.div`
     display: flex;
@@ -194,9 +194,9 @@ const Mylibrary = () => {
     return (
         <>
             <TopContainer>
-                <button onClick={RemoveHangler}>logout</button>
                 <Container>
                     {modalHandle === true ? null : <Header>BOOKUS</Header>}
+                    <button onClick={RemoveHangler}>logout</button>
                     {hasAccessToken ? <ProfileBox>로그인해주세요</ProfileBox> : null}
                     <Profile>
                         <img src={profileLoginImg} alt="profile" onClick={isLogin ? onClickProfile : showModal} style={{ width: '35px' }} />
