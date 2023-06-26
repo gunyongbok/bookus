@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { AiOutlinePlus } from 'react-icons/ai';
-import { CgProfile } from 'react-icons/cg';
 import { BiBook } from 'react-icons/bi';
 import ModalPage from '../components/ModalPage';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { isLoginAtom } from '../atoms';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import profileLoginImg from '../Image/profile.png';
 
 const TopContainer = styled.div`
     display: flex;
@@ -68,8 +68,22 @@ const BookContainer = styled.div`
 const Profile = styled.div`
     font-size: 30px;
     position: absolute;
-    right: 50px;
-    top: 50px;
+    right: 30px;
+    top: 60px;
+`;
+
+const ProfileBox = styled.div`
+    font-size: 30px;
+    position: absolute;
+    right: 75px;
+    top: 58px;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 35px;
+    text-decoration: underline;
+    text-decoration-color: black;
 `;
 
 const BookUl = styled.ul`
@@ -152,6 +166,8 @@ const Mylibrary = () => {
         window.location.reload();
     };
 
+    const hasAccessToken = localStorage.getItem('accessToken') === null;
+
     useEffect(() => {
         const accessTokenHeader = localStorage.getItem('accessToken');
 
@@ -181,8 +197,9 @@ const Mylibrary = () => {
                 <button onClick={RemoveHangler}>logout</button>
                 <Container>
                     {modalHandle === true ? null : <Header>BOOKUS</Header>}
+                    {hasAccessToken ? <ProfileBox>로그인해주세요</ProfileBox> : null}
                     <Profile>
-                        <CgProfile onClick={isLogin ? onClickProfile : showModal} />
+                        <img src={profileLoginImg} alt="profile" onClick={isLogin ? onClickProfile : showModal} style={{ width: '35px' }} />
                     </Profile>
                     {modalHandle && <ModalPage setModalHandle={setModalHandle} />}
 

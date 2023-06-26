@@ -63,7 +63,11 @@ const BookInfo = styled.div`
 const BookReportListContainer = styled.div`
     width: 73%;
     height: 100%;
-    background-color: yellow;
+    background-color: #e8e5e5;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const BookTitleAuthor = styled.div`
@@ -141,7 +145,7 @@ const Storage = () => {
                                 <h4 style={{ fontSize: '12px', fontWeight: '400', margin: '0' }}>{state.author[0]}</h4>
                             </BookTitleAuthor>
                         </BookInfo>
-                        <BookReportListContainer></BookReportListContainer>
+                        <BookReportListContainer>독서록 나타날 부분</BookReportListContainer>
                     </Main>
                 </Container>
             </TopContainer>

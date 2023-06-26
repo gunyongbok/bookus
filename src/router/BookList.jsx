@@ -62,7 +62,11 @@ const BookInfo = styled.div`
 const BookReportListContainer = styled.div`
     width: 73%;
     height: 100%;
-    background-color: yellow;
+    background-color: #e8e5e5;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const BookTitleAuthor = styled.div`
@@ -100,7 +104,7 @@ const BookList = (props) => {
                         </BookInfo>
                         <BookReportListContainer>
                             <Link to="/bookreport" state={{ book: bookInfo }}>
-                                Hi
+                                독서록 작성하기
                             </Link>
                         </BookReportListContainer>
                     </Main>
