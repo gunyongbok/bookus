@@ -166,27 +166,25 @@ const Mylibrary = () => {
         window.location.reload();
     };
 
-    const hasAccessToken = localStorage.getItem('accessToken') === null;
-
     useEffect(() => {
-        const accessTokenHeader = localStorage.getItem('accessToken');
+        if (isLogin) {
+            const accessTokenHeader = localStorage.getItem('accessToken');
 
-        axios
-            .get(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/report`, {
-                headers: {
-                    'Access-token': `${accessTokenHeader}`,
-                },
-            })
-            .then((response) => {
-                setInfo(response);
-                console.log(response.data.result);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-
-        // window.location.reload();
-    }, []);
+            axios
+                .get(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/report`, {
+                    headers: {
+                        'Access-token': accessTokenHeader,
+                    },
+                })
+                .then((response) => {
+                    setInfo(response);
+                    console.log(response.data.result);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    }, [isLogin]);
 
     const bookData = info.data?.result;
     console.log(bookData);
@@ -197,7 +195,7 @@ const Mylibrary = () => {
                 <Container>
                     {modalHandle === true ? null : <Header>BOOKUS</Header>}
                     <button onClick={RemoveHangler}>logout</button>
-                    {hasAccessToken ? <ProfileBox>로그인해주세요</ProfileBox> : null}
+                    {isLogin ? null : <ProfileBox>로그인해주세요</ProfileBox>}
                     <Profile>
                         <img src={profileLoginImg} alt="profile" onClick={isLogin ? onClickProfile : showModal} style={{ width: '35px' }} />
                     </Profile>
