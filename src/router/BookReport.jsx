@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { BsList } from 'react-icons/bs';
 import { AiOutlineSave } from 'react-icons/ai';
 import profileLoginImg from '../Image/Profile.png';
+import axios from 'axios';
 
 const TopContainer = styled.div`
     display: flex;
@@ -196,19 +197,57 @@ const StyledLink = styled(Link)`
 
 const BookReport = () => {
     const selectedBookData = useLocation().state.book;
-    // console.log(selectedBookData);
-    const [contents, setContents] = useState('');
-    const [startDate, setstartDate] = useState('');
-    const [startPage, setStartPage] = useState(0);
-    const [endPage, setEndPage] = useState(0);
+    const bookId = selectedBookData['bookId'];
     const [title, setTitle] = useState('');
+    const [startDate, setstartDate] = useState('');
+    const [contents, setContents] = useState('');
+    const [startPage, setStartPage] = useState('');
+    const [endPage, setEndPage] = useState('');
+
+    const handleTitle = (event) => {
+        setTitle(event.target.value);
+    };
+
+    const handleDate = (event) => {
+        setstartDate(event.target.value);
+    };
+
+    const handleContents = (event) => {
+        setContents(event.target.value);
+    };
+
+    const handleStartPage = (event) => {
+        setStartPage(event.target.value);
+    };
+
+    const handleEndPage = (event) => {
+        setEndPage(event.target.value);
+    };
 
     const saveBookReport = () => {
-        console.log(contents);
-        console.log(startDate);
-        console.log(startPage);
-        console.log(endPage);
-        console.log(title);
+        const accessTokenHeader = localStorage.getItem('accessToken');
+
+        const headers = {
+            'Access-token': `${accessTokenHeader}`,
+        };
+
+        const data = {
+            bookId: bookId,
+            title: title,
+            startDate: startDate,
+            contents: contents,
+            startPage: Number(startPage),
+            endPage: Number(endPage),
+        };
+
+        axios
+            .post(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/report`, data, { headers })
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     return (
@@ -229,20 +268,20 @@ const BookReport = () => {
                                 <h4 style={{ fontSize: '12px', fontWeight: '400', margin: '0' }}>{selectedBookData.authors}</h4>
                                 <PageReportContainer>
                                     Page
-                                    <StartPage placeholder="000" />-<EndPage placeholder="000" /> p
+                                    <StartPage value={startPage} onChange={handleStartPage} placeholder="000" />-<EndPage value={endPage} onChange={handleEndPage} placeholder="000" /> p
                                 </PageReportContainer>
                             </BookTitleAuthor>
                         </BookInfo>
                         <BookReportListContainer>
                             <InputContainer>
-                                <TitleInput placeholder="제목을 입력하세요."></TitleInput>
+                                <TitleInput type="text" value={title} onChange={handleTitle} placeholder="제목을 입력하세요."></TitleInput>
                                 <DateLabel htmlFor="date">Date</DateLabel>
-                                <DateInput id="date" type="date"></DateInput>
+                                <DateInput value={startDate} onChange={handleDate} id="date" type="date"></DateInput>
                             </InputContainer>
-                            <ContentsInput placeholder="내용을 입력하세요."></ContentsInput>
+                            <ContentsInput value={contents} onChange={handleContents} placeholder="내용을 입력하세요."></ContentsInput>
                             <FooterBar>
                                 <BsList />
-                                <AiOutlineSave />
+                                <AiOutlineSave onClick={saveBookReport} />
                             </FooterBar>
                         </BookReportListContainer>
                     </Main>
