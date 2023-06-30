@@ -2,6 +2,8 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import profileLoginImg from '../Image/Profile.png';
+import axios from 'axios';
+import { useState } from 'react';
 
 const TopContainer = styled.div`
     display: flex;
@@ -99,25 +101,69 @@ const ImgBox = styled.div`
     box-shadow: rgba(0, 0, 0, 0.35) -4px 5px 15px;
 `;
 
+const StyledLink = styled(Link)`
+    color: black;
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;
+    }
+`;
+
 const BookList = (props) => {
+    const [info, setInfo] = useState([]);
     const bookInfo = useLocation().state.books;
+
+    const getBookReport = () => {
+        const accessTokenHeader = localStorage.getItem('accessToken');
+
+        axios
+            .get(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/report`, {
+                headers: {
+                    'Access-token': accessTokenHeader,
+                },
+            })
+            .then((response) => {
+                setInfo(response);
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    const propsTitle = bookInfo.title;
+    const bookData = info.data?.result;
+    const bookInfoBox = [];
+    bookData.map((e) => {
+        if (e['title'] === propsTitle) {
+            bookInfoBox.push(e);
+        }
+    });
+    const firstOfBox = bookInfoBox[0];
+    console.log(firstOfBox);
 
     return (
         <>
             <TopContainer>
                 <Container>
-                    <Header>BOOKUS</Header>
+                    <Header>
+                        <StyledLink to="/">BOOKUS</StyledLink>
+                        <button onClick={getBookReport}>hi</button>
+                    </Header>
                     <Profile>
                         <img src={profileLoginImg} alt="profile" style={{ width: '35px' }} />
                     </Profile>
                     <Main>
                         <BookInfo>
                             <ImgBox>
-                                <img src={bookInfo.thumbnail} alt={bookInfo.thumbnail} style={{ width: '205px', height: '300px' }} />
+                                <img src={firstOfBox['thumbnail']} style={{ width: '205px', height: '300px' }} />
                             </ImgBox>
                             <BookTitleAuthor>
-                                <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '5px' }}>{bookInfo.title}</h3>
-                                <h4 style={{ fontSize: '12px', fontWeight: '400', margin: '0' }}>{bookInfo.authors}</h4>
+                                <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '5px' }}>{firstOfBox['title']}</h3>
+                                <h4 style={{ fontSize: '12px', fontWeight: '400', margin: '0' }}>{firstOfBox['author'][0]}</h4>
                             </BookTitleAuthor>
                         </BookInfo>
                         <BookReportListContainer>
@@ -127,7 +173,7 @@ const BookList = (props) => {
                                 <TitleDetails>Title</TitleDetails>
                                 <TitleDetails>Text</TitleDetails>
                             </BookReportTitle>
-                            <Link to="/bookreport" state={{ book: bookInfo }}>
+                            <Link to="/bookreport" state={{ book: firstOfBox }}>
                                 독서록 작성하기(이 부분 리스트로 표현될 예정)
                             </Link>
                         </BookReportListContainer>

@@ -178,7 +178,6 @@ const Mylibrary = () => {
                 })
                 .then((response) => {
                     setInfo(response);
-                    console.log(response.data.result);
                 })
                 .catch((error) => {
                     console.log(error);

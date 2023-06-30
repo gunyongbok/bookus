@@ -5,6 +5,7 @@ import { bookSearch } from '../components/api';
 import Item from '../components/Item';
 import { AiOutlineLeft, AiOutlineRight, AiOutlineSearch } from 'react-icons/ai';
 import profileLoginImg from '../Image/Profile.png';
+import { Link, useNavigate } from 'react-router-dom';
 
 const TopContainer = styled.div`
     display: flex;
@@ -122,6 +123,17 @@ const XBtn = styled.div`
     top: 30px;
 `;
 
+const StyledLink = styled(Link)`
+    color: black;
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;
+    }
+`;
+
 const Search = (props) => {
     const [books, setBooks] = useState([]);
     const [text, setText] = useState('');
@@ -178,7 +190,9 @@ const Search = (props) => {
         <>
             <TopContainer>
                 <Container>
-                    <Header>BOOKUS</Header>
+                    <Header>
+                        <StyledLink to="/">BOOKUS</StyledLink>
+                    </Header>
                     <Profile>
                         <img src={profileLoginImg} alt="profile" style={{ width: '35px' }} />
                     </Profile>

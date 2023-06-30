@@ -183,29 +183,50 @@ const FooterBar = styled.footer`
     font-size: 25px;
 `;
 
+const StyledLink = styled(Link)`
+    color: black;
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;
+    }
+`;
+
 const BookReport = () => {
-    const books = useLocation().state.book;
-    // console.log(books);
+    const selectedBookData = useLocation().state.book;
+    // console.log(selectedBookData);
     const [contents, setContents] = useState('');
-    const [date, setdate] = useState('');
+    const [startDate, setstartDate] = useState('');
     const [startPage, setStartPage] = useState(0);
     const [endPage, setEndPage] = useState(0);
     const [title, setTitle] = useState('');
+
+    const saveBookReport = () => {
+        console.log(contents);
+        console.log(startDate);
+        console.log(startPage);
+        console.log(endPage);
+        console.log(title);
+    };
 
     return (
         <>
             <TopContainer>
                 <Container>
-                    <Header>BOOKUS</Header>
+                    <Header>
+                        <StyledLink to="/">BOOKUS</StyledLink>
+                    </Header>
                     <Profile>
                         <img src={profileLoginImg} alt="profile" style={{ width: '35px' }} />
                     </Profile>
                     <Main>
                         <BookInfo>
-                            <img src={books.thumbnail} alt={books.thumbnail} style={{ width: '145px', height: '190px' }} />
+                            <img src={selectedBookData.thumbnail} alt={selectedBookData.thumbnail} style={{ width: '145px', height: '190px' }} />
                             <BookTitleAuthor>
-                                <h3 style={{ fontSize: '14px', fontWeight: '700', marginBottom: '5px' }}>{books.title}</h3>
-                                <h4 style={{ fontSize: '12px', fontWeight: '400', margin: '0' }}>{books.authors}</h4>
+                                <h3 style={{ fontSize: '14px', fontWeight: '700', marginBottom: '5px' }}>{selectedBookData.title}</h3>
+                                <h4 style={{ fontSize: '12px', fontWeight: '400', margin: '0' }}>{selectedBookData.authors}</h4>
                                 <PageReportContainer>
                                     Page
                                     <StartPage placeholder="000" />-<EndPage placeholder="000" /> p
