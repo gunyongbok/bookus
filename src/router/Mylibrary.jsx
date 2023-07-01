@@ -211,9 +211,13 @@ const Mylibrary = () => {
                                 ))}
                                 <PlusLi>
                                     <PlusBox>
-                                        <Link to="/booksearch">
-                                            <AiOutlinePlus />
-                                        </Link>
+                                        {isLogin ? (
+                                            <Link to="/booksearch">
+                                                <AiOutlinePlus />
+                                            </Link>
+                                        ) : (
+                                            <AiOutlinePlus onClick={showModal} />
+                                        )}
                                     </PlusBox>
                                 </PlusLi>
                             </BookUl>

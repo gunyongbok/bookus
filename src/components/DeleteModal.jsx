@@ -62,7 +62,7 @@ const DeleteModal = ({ setModalHandle, id }) => {
     const closeModal = () => {
         setModalHandle(false);
     };
-
+    console.log(id);
     const handleDelete = () => {
         const accessTokenHeader = localStorage.getItem('accessToken');
         const options = {
@@ -74,13 +74,12 @@ const DeleteModal = ({ setModalHandle, id }) => {
             .put(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/report/book/${id}`, id, options)
             .then((response) => {
                 console.log(response);
+                navigate('/');
+                window.location.href = '/';
             })
             .catch((error) => {
                 console.log(error);
             });
-
-        navigate('/');
-        window.location.href = '/';
     };
 
     return (
