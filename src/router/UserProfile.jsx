@@ -81,7 +81,6 @@ const UserInfoBox = styled.div`
 const StyledLink = styled(Link)`
     width: 80%;
     height: 10%;
-    background-color: yellow;
     color: black;
     text-decoration: none;
 

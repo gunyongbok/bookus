@@ -139,7 +139,6 @@ const PlusBox = styled.div`
 const Mylibrary = () => {
     const [info, setInfo] = useState([]);
     const [modalHandle, setModalHandle] = useState(false);
-    const [reLoad, setReload] = useState(false);
     const isLogin = useRecoilValue(isLoginAtom);
     const setLogin = useSetRecoilState(isLoginAtom);
     const navigate = useNavigate();

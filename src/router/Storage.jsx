@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
 import styled from 'styled-components';
 import axios from 'axios';
+import profileLoginImg from '../Image/Profile.png';
+import DeleteModal from '../components/DeleteModal';
 
 const TopContainer = styled.div`
     display: flex;
@@ -83,65 +85,43 @@ const ImgBox = styled.div`
 `;
 
 const DeleteContainer = styled.div`
+    height: 5%;
+    width: 6%;
     display: flex;
     position: relative;
-    top: -20px;
-    left: 60px;
+    top: -10px;
+    left: 70px;
     color: #6e6e6e;
-`;
-
-const DeleteBox = styled.div`
     font-size: 13px;
-    position: relative;
-    top: 3px;
-    left: 5px;
 `;
 
 const Storage = () => {
     const { state } = useLocation();
     const { id } = useParams();
-    const navigate = useNavigate();
+    const [modalHandle, setModalHandle] = useState(false);
 
-    const handleDelete = () => {
-        const accessTokenHeader = localStorage.getItem('accessToken');
-        const options = {
-            headers: {
-                'Access-token': `${accessTokenHeader}`,
-            },
-        };
-        axios
-            .put(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/report/book/${id}`, id, options)
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-
-        navigate('/');
+    const showModal = () => {
+        setModalHandle(true);
     };
-
-    console.log(id);
 
     return (
         <>
             <TopContainer>
                 <Container>
+                    {modalHandle && <DeleteModal setModalHandle={setModalHandle} id={id} />}
                     <Header>BOOKUS</Header>
                     <Profile>
-                        <CgProfile />
+                        <img src={profileLoginImg} alt="profile" style={{ width: '35px' }} />
                     </Profile>
                     <Main>
-                        <DeleteContainer onClick={handleDelete}>
-                            x <DeleteBox>Delete</DeleteBox>
-                        </DeleteContainer>
+                        <DeleteContainer onClick={showModal}>X Delete</DeleteContainer>
                         <BookInfo>
                             <ImgBox>
                                 <img src={state.thumbnail} alt={state.thumbnail} style={{ width: '205px', height: '300px' }} />
                             </ImgBox>
 
                             <BookTitleAuthor>
-                                <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '5px' }}>{state.title}</h3>
+                                <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '5px' }}>{state.title.length > 10 ? `${state.title.slice(0, 20)}...` : state.title}</h3>
                                 <h4 style={{ fontSize: '12px', fontWeight: '400', margin: '0' }}>{state.author[0]}</h4>
                             </BookTitleAuthor>
                         </BookInfo>
