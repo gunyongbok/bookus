@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import profileLoginImg from '../Image/Profile.png';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const TopContainer = styled.div`
     display: flex;
@@ -112,38 +112,38 @@ const StyledLink = styled(Link)`
     }
 `;
 
-const BookList = (props) => {
-    const [info, setInfo] = useState([]);
+const BookList = () => {
+    const [bookData, setBookData] = useState(null);
     const bookInfo = useLocation().state.books;
 
-    const getBookReport = () => {
-        const accessTokenHeader = localStorage.getItem('accessToken');
+    useEffect(() => {
+        writeBookReport();
+    }, []);
 
-        axios
-            .get(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/report`, {
+    const writeBookReport = async () => {
+        try {
+            const accessTokenHeader = localStorage.getItem('accessToken');
+            await axios.get(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/report`, {
                 headers: {
                     'Access-token': accessTokenHeader,
                 },
-            })
-            .then((response) => {
-                setInfo(response);
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
             });
+            const response = await axios.get(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/report`, {
+                headers: {
+                    'Access-token': accessTokenHeader,
+                },
+            });
+            const responseData = response.data['result'];
+            const propsTitle = bookInfo.title;
+            responseData.map((e) => {
+                if (e['title'] === propsTitle) setBookData(e);
+            });
+        } catch (error) {
+            console.log(error);
+        }
     };
 
-    const propsTitle = bookInfo.title;
-    const bookData = info.data?.result;
-    const bookInfoBox = [];
-    bookData.map((e) => {
-        if (e['title'] === propsTitle) {
-            bookInfoBox.push(e);
-        }
-    });
-    const firstOfBox = bookInfoBox[0];
-    console.log(firstOfBox);
+    console.log(bookData);
 
     return (
         <>
@@ -151,7 +151,6 @@ const BookList = (props) => {
                 <Container>
                     <Header>
                         <StyledLink to="/">BOOKUS</StyledLink>
-                        <button onClick={getBookReport}>hi</button>
                     </Header>
                     <Profile>
                         <img src={profileLoginImg} alt="profile" style={{ width: '35px' }} />
@@ -159,13 +158,14 @@ const BookList = (props) => {
                     <Main>
                         <BookInfo>
                             <ImgBox>
-                                <img src={firstOfBox['thumbnail']} style={{ width: '205px', height: '300px' }} />
+                                <img src={bookInfo['thumbnail']} style={{ width: '205px', height: '300px' }} />
                             </ImgBox>
                             <BookTitleAuthor>
-                                <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '5px' }}>{firstOfBox['title']}</h3>
-                                <h4 style={{ fontSize: '12px', fontWeight: '400', margin: '0' }}>{firstOfBox['author'][0]}</h4>
+                                <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '5px' }}>{bookInfo['title']}</h3>
+                                <h4 style={{ fontSize: '12px', fontWeight: '400', margin: '0' }}>{bookInfo['authors']}</h4>
                             </BookTitleAuthor>
                         </BookInfo>
+
                         <BookReportListContainer>
                             <BookReportTitle>
                                 <TitleDetails>Page</TitleDetails>
@@ -173,9 +173,12 @@ const BookList = (props) => {
                                 <TitleDetails>Title</TitleDetails>
                                 <TitleDetails>Text</TitleDetails>
                             </BookReportTitle>
-                            <Link to="/bookreport" state={{ book: firstOfBox }}>
+
+                            <Link to="/bookreport" state={{ book: bookData }}>
                                 독서록 작성하기(이 부분 리스트로 표현될 예정)
                             </Link>
+
+                            <button onClick={writeBookReport}>독서록 작성하기(이 부분 리스트로 표현될 예정)</button>
                         </BookReportListContainer>
                     </Main>
                 </Container>

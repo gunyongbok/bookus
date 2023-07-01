@@ -139,6 +139,7 @@ const PlusBox = styled.div`
 const Mylibrary = () => {
     const [info, setInfo] = useState([]);
     const [modalHandle, setModalHandle] = useState(false);
+    const [reLoad, setReload] = useState(false);
     const isLogin = useRecoilValue(isLoginAtom);
     const setLogin = useSetRecoilState(isLoginAtom);
     const navigate = useNavigate();
@@ -157,14 +158,6 @@ const Mylibrary = () => {
     }
 
     console.log(isLogin);
-
-    const RemoveHangler = () => {
-        window.localStorage.removeItem('accessToken');
-        window.localStorage.removeItem('refreshToken');
-        window.localStorage.removeItem('userId');
-        window.localStorage.removeItem('userName');
-        window.location.reload();
-    };
 
     useEffect(() => {
         if (isLogin) {
@@ -193,7 +186,6 @@ const Mylibrary = () => {
             <TopContainer>
                 <Container>
                     {modalHandle === true ? null : <Header>BOOKUS</Header>}
-                    <button onClick={RemoveHangler}>logout</button>
                     {isLogin ? null : <ProfileBox>로그인해주세요</ProfileBox>}
                     <Profile>
                         <img src={profileLoginImg} alt="profile" onClick={isLogin ? onClickProfile : showModal} style={{ width: '35px' }} />
