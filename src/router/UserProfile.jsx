@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import profileLoginImg from '../Image/Profile.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const TopContainer = styled.div`
     display: flex;
@@ -104,7 +104,19 @@ const LogoutButton = styled.button`
     color: #6a6868;
 `;
 
+const StyledLinkTitle = styled(Link)`
+    color: black;
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;
+    }
+`;
+
 const UserProfile = () => {
+    const navigate = useNavigate();
     const userName = localStorage.getItem('userName');
 
     const RemoveHangler = () => {
@@ -118,12 +130,14 @@ const UserProfile = () => {
     return (
         <TopContainer>
             <Container>
-                <Header>BOOKUS</Header>
+                <Header>
+                    <StyledLinkTitle to="/">BOOKUS</StyledLinkTitle>
+                </Header>
                 <Profile>
                     <img src={profileLoginImg} alt="profile" style={{ width: '35px' }} />
                 </Profile>
                 <Main>
-                    <XBox>x</XBox>
+                    <XBox onClick={() => navigate('/')}>x</XBox>
                     <MainProfileBox>
                         <img src={profileLoginImg} alt="profile" style={{ width: '80px' }} />
                         <UserNameBox>

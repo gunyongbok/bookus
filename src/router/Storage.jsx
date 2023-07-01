@@ -119,7 +119,6 @@ const Storage = () => {
                             <ImgBox>
                                 <img src={state.thumbnail} alt={state.thumbnail} style={{ width: '205px', height: '300px' }} />
                             </ImgBox>
-
                             <BookTitleAuthor>
                                 <h3 style={{ fontSize: '20px', fontWeight: '700', marginBottom: '5px' }}>{state.title.length > 10 ? `${state.title.slice(0, 20)}...` : state.title}</h3>
                                 <h4 style={{ fontSize: '12px', fontWeight: '400', margin: '0' }}>{state.author[0]}</h4>
