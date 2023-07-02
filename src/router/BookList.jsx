@@ -174,8 +174,6 @@ const BookList = () => {
         }
     };
 
-    console.log(bookData);
-
     return (
         <>
             <TopContainer>

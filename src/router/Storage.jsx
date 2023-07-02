@@ -143,13 +143,14 @@ const Storage = () => {
 
     const getBookReport = () => {
         const accessTokenHeader = localStorage.getItem('accessToken');
+        console.log(accessTokenHeader);
         const options = {
             headers: {
                 'Access-token': `${accessTokenHeader}`,
             },
         };
         axios
-            .get(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/report/${id}`, id, options)
+            .get(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/report/${id}`, options)
             .then((response) => {
                 console.log(response);
             })

@@ -141,13 +141,17 @@ const Search = (props) => {
     const [page, setPage] = useState(1);
 
     const upPage = () => {
-        bookSearchHttpHandler(query, true);
-        setPage((prev) => prev + 1);
+        const updatedPage = page + 1;
+        setPage(updatedPage);
+        bookSearchHttpHandler(query, true, updatedPage);
     };
 
     const downPage = () => {
-        bookSearchHttpHandler(query, true);
-        setPage((prev) => prev - 1);
+        if (page > 1) {
+            const updatedPage = page - 1;
+            setPage(updatedPage);
+            bookSearchHttpHandler(query, true, updatedPage);
+        }
     };
 
     // 엔터를 눌렀을 때 호출 되는 함수
@@ -168,7 +172,7 @@ const Search = (props) => {
     }, [query]);
 
     // book search 핸들러
-    const bookSearchHttpHandler = async (query, reset) => {
+    const bookSearchHttpHandler = async (query, reset, page) => {
         // paramter 설정
         const params = {
             query: query,

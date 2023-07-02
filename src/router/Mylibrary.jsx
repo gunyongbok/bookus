@@ -136,6 +136,21 @@ const PlusBox = styled.div`
     font-size: 30px;
 `;
 
+const EmptyLi = styled.li`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 18%;
+    height: 45%;
+    list-style: none;
+    border-bottom: 2px solid rgba(160, 160, 160, 0.65);
+    margin-left: 2%;
+    padding-top: 15px;
+    text-decoration: underline;
+    text-decoration-color: black;
+`;
+
 const Mylibrary = () => {
     const [info, setInfo] = useState([]);
     const [modalHandle, setModalHandle] = useState(false);
@@ -178,6 +193,8 @@ const Mylibrary = () => {
     }, [isLogin]);
 
     const bookData = info.data?.result;
+    const MAX_BOOKS = 10;
+    console.log(bookData);
 
     return (
         <>
@@ -197,28 +214,39 @@ const Mylibrary = () => {
                         </Library>
                         <BookContainer>
                             <BookUl>
-                                {bookData?.map((data) => (
-                                    <BookLi
-                                        onClick={() => {
-                                            navigate(`bookreportstorage/${data.bookId}`, { state: data });
-                                        }}
-                                        key={data.bookId}
-                                    >
-                                        <img src={data.thumbnail} />
-                                        <p style={{ fontSize: '13px' }}>{data.title}</p>
-                                    </BookLi>
-                                ))}
-                                <PlusLi>
-                                    <PlusBox>
-                                        {isLogin ? (
-                                            <Link to="/booksearch">
-                                                <AiOutlinePlus />
-                                            </Link>
-                                        ) : (
-                                            <AiOutlinePlus onClick={showModal} />
-                                        )}
-                                    </PlusBox>
-                                </PlusLi>
+                                {[...Array(MAX_BOOKS)].map((_, index) => {
+                                    const data = bookData?.[index]; // Use optional chaining to handle undefined array index
+
+                                    if (index === bookData?.length) {
+                                        return (
+                                            <PlusLi key={index}>
+                                                <PlusBox>
+                                                    {isLogin ? (
+                                                        <Link to="/booksearch">
+                                                            <AiOutlinePlus />
+                                                        </Link>
+                                                    ) : (
+                                                        <AiOutlinePlus onClick={showModal} />
+                                                    )}
+                                                </PlusBox>
+                                            </PlusLi>
+                                        );
+                                    } else if (data) {
+                                        return (
+                                            <BookLi
+                                                onClick={() => {
+                                                    navigate(`bookreportstorage/${data.bookId}`, { state: data });
+                                                }}
+                                                key={data.bookId}
+                                            >
+                                                <img src={data.thumbnail} />
+                                                <p style={{ fontSize: '13px' }}>{data.title}</p>
+                                            </BookLi>
+                                        );
+                                    } else {
+                                        return <EmptyLi key={index}></EmptyLi>;
+                                    }
+                                })}
                             </BookUl>
                         </BookContainer>
                     </Main>
