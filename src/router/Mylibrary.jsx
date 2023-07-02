@@ -152,11 +152,11 @@ const Mylibrary = () => {
         setModalHandle(true);
     };
 
-    if (userName !== null) {
-        setLogin(true);
-    }
-
-    console.log(isLogin);
+    useEffect(() => {
+        if (userName !== null) {
+            setLogin(true);
+        }
+    }, [userName, setLogin]);
 
     useEffect(() => {
         if (isLogin) {
@@ -178,7 +178,6 @@ const Mylibrary = () => {
     }, [isLogin]);
 
     const bookData = info.data?.result;
-    console.log(bookData);
 
     return (
         <>

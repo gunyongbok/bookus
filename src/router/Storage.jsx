@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { CgProfile } from 'react-icons/cg';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import profileLoginImg from '../Image/Profile.png';
@@ -62,16 +61,6 @@ const BookInfo = styled.div`
     margin-right: 30px;
 `;
 
-const BookReportListContainer = styled.div`
-    width: 73%;
-    height: 100%;
-    background-color: #e8e5e5;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
 const BookTitleAuthor = styled.div`
     width: 82%;
     padding-bottom: 5px;
@@ -95,6 +84,54 @@ const DeleteContainer = styled.div`
     font-size: 13px;
 `;
 
+const BookReportListContainer = styled.div`
+    width: 73%;
+    height: 100%;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+`;
+
+const BookReportTitle = styled.div`
+    width: 100%;
+    height: 8%;
+    border-bottom: 2px solid black;
+    position: absolute;
+    top: 0;
+    display: flex;
+`;
+
+const DateDetails = styled.div`
+    height: 100%;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 700;
+`;
+
+const TitleDetails = styled.div`
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 700;
+`;
+
+const StyledLink = styled(Link)`
+    color: black;
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;
+    }
+`;
+
 const Storage = () => {
     const { state } = useLocation();
     const { id } = useParams();
@@ -104,12 +141,31 @@ const Storage = () => {
         setModalHandle(true);
     };
 
+    const getBookReport = () => {
+        const accessTokenHeader = localStorage.getItem('accessToken');
+        const options = {
+            headers: {
+                'Access-token': `${accessTokenHeader}`,
+            },
+        };
+        axios
+            .get(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/report/${id}`, id, options)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     return (
         <>
             <TopContainer>
                 <Container>
                     {modalHandle && <DeleteModal setModalHandle={setModalHandle} id={id} />}
-                    <Header>BOOKUS</Header>
+                    <Header>
+                        <StyledLink to="/">BOOKUS</StyledLink>
+                    </Header>
                     <Profile>
                         <img src={profileLoginImg} alt="profile" style={{ width: '35px' }} />
                     </Profile>
@@ -124,7 +180,14 @@ const Storage = () => {
                                 <h4 style={{ fontSize: '12px', fontWeight: '400', margin: '0' }}>{state.author[0]}</h4>
                             </BookTitleAuthor>
                         </BookInfo>
-                        <BookReportListContainer>독서록 나타날 부분</BookReportListContainer>
+                        <BookReportListContainer>
+                            <BookReportTitle>
+                                <DateDetails>Page</DateDetails>
+                                <DateDetails>Date</DateDetails>
+                                <TitleDetails>Title</TitleDetails>
+                            </BookReportTitle>
+                            <button onClick={getBookReport}>hi</button>
+                        </BookReportListContainer>
                     </Main>
                 </Container>
             </TopContainer>

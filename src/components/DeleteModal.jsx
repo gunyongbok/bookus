@@ -62,7 +62,7 @@ const DeleteModal = ({ setModalHandle, id }) => {
     const closeModal = () => {
         setModalHandle(false);
     };
-    console.log(id);
+
     const handleDelete = () => {
         const accessTokenHeader = localStorage.getItem('accessToken');
         const options = {

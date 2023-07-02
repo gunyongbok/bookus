@@ -80,6 +80,26 @@ const BookReportTitle = styled.div`
     display: flex;
 `;
 
+const BookReportContents = styled.div`
+    width: 100%;
+    height: 90%;
+    position: absolute;
+    top: 43px;
+    display: flex;
+    flex-direction: column;
+`;
+
+const BookReportContentBox = styled.div`
+    flex: 1;
+    height: 100%;
+    border-bottom: 1px solid #c3c2c2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    font-weight: 400;
+`;
+
 const TitleDetails = styled.div`
     height: 100%;
     width: 25%;
@@ -105,6 +125,17 @@ const StyledLink = styled(Link)`
     color: black;
     text-decoration: none;
 
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;
+    }
+`;
+
+const StyledLinkBox = styled(Link)`
+    color: black;
+    text-decoration: none;
+    height: 70px;
     &:hover,
     &:focus,
     &:active {
@@ -165,20 +196,22 @@ const BookList = () => {
                                 <h4 style={{ fontSize: '12px', fontWeight: '400', margin: '0' }}>{bookInfo['authors']}</h4>
                             </BookTitleAuthor>
                         </BookInfo>
-
                         <BookReportListContainer>
                             <BookReportTitle>
                                 <TitleDetails>Page</TitleDetails>
                                 <TitleDetails>Date</TitleDetails>
                                 <TitleDetails>Title</TitleDetails>
-                                <TitleDetails>Text</TitleDetails>
                             </BookReportTitle>
-
-                            <Link to="/bookreport" state={{ book: bookData }}>
-                                독서록 작성하기(이 부분 리스트로 표현될 예정)
-                            </Link>
-
-                            <button onClick={writeBookReport}>독서록 작성하기(이 부분 리스트로 표현될 예정)</button>
+                            <BookReportContents>
+                                <StyledLinkBox to="/bookreport" state={{ book: bookData }}>
+                                    <BookReportContentBox>+</BookReportContentBox>
+                                </StyledLinkBox>
+                                <BookReportContentBox />
+                                <BookReportContentBox />
+                                <BookReportContentBox />
+                                <BookReportContentBox />
+                                <BookReportContentBox />
+                            </BookReportContents>
                         </BookReportListContainer>
                     </Main>
                 </Container>
