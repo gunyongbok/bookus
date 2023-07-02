@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -132,9 +132,69 @@ const StyledLink = styled(Link)`
     }
 `;
 
+const BookReportUl = styled.ul`
+    width: 100%;
+    height: 90%;
+    position: relative;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+`;
+
+const StyledLinkBox = styled(Link)`
+    color: black;
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;
+    }
+`;
+
+const BookReportLi = styled.li`
+    flex: 1;
+    height: 15%;
+    width: 107%;
+    position: relative;
+    left: -40px;
+    border-bottom: 1px solid #c3c2c2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    font-weight: 400;
+`;
+
+const BookReportBox = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+`;
+
+const BookReportDate = styled.div`
+    width: 25%;
+    height: 100%;
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: 500;
+`;
+
+const BookReportTitle1 = styled.div`
+    width: 50%;
+    height: 100%;
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: 500;
+`;
+
 const Storage = () => {
     const { state } = useLocation();
     const { id } = useParams();
+    const [bookData, setBookData] = useState([]);
     const [modalHandle, setModalHandle] = useState(false);
 
     const showModal = () => {
@@ -143,7 +203,6 @@ const Storage = () => {
 
     const getBookReport = () => {
         const accessTokenHeader = localStorage.getItem('accessToken');
-        console.log(accessTokenHeader);
         const options = {
             headers: {
                 'Access-token': `${accessTokenHeader}`,
@@ -152,12 +211,21 @@ const Storage = () => {
         axios
             .get(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/report/${id}`, options)
             .then((response) => {
-                console.log(response);
+                const result = response.data.result;
+                setBookData(result);
             })
             .catch((error) => {
                 console.log(error);
             });
     };
+
+    useEffect(() => {
+        getBookReport();
+    }, []);
+
+    console.log(state);
+
+    const MAX_BOOKS = 7;
 
     return (
         <>
@@ -187,7 +255,33 @@ const Storage = () => {
                                 <DateDetails>Date</DateDetails>
                                 <TitleDetails>Title</TitleDetails>
                             </BookReportTitle>
-                            <button onClick={getBookReport}>hi</button>
+                            <BookReportUl>
+                                {[...Array(MAX_BOOKS)].map((_, index) => {
+                                    const data = bookData?.[index];
+
+                                    if (index === bookData.length) {
+                                        return (
+                                            <BookReportLi key={index}>
+                                                <StyledLinkBox to="/bookreport" state={{ book: state }}>
+                                                    +
+                                                </StyledLinkBox>
+                                            </BookReportLi>
+                                        );
+                                    } else if (data) {
+                                        return (
+                                            <BookReportLi key={index}>
+                                                <BookReportBox>
+                                                    <BookReportDate>{`${data['startPage']} - ${data['endPage']} p`}</BookReportDate>
+                                                    <BookReportDate>{data['startDate']}</BookReportDate>
+                                                    <BookReportTitle1>{data['title']}</BookReportTitle1>
+                                                </BookReportBox>
+                                            </BookReportLi>
+                                        );
+                                    } else {
+                                        return <BookReportLi key={index}></BookReportLi>;
+                                    }
+                                })}
+                            </BookReportUl>
                         </BookReportListContainer>
                     </Main>
                 </Container>
