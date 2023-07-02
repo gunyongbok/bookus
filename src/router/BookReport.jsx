@@ -244,6 +244,7 @@ const BookReport = () => {
             .post(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/report`, data, { headers })
             .then((response) => {
                 console.log(response);
+                alert('저장이 완료되었습니다.');
             })
             .catch((error) => {
                 console.log(error);

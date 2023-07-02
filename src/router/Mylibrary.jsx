@@ -201,7 +201,7 @@ const Mylibrary = () => {
             <TopContainer>
                 <Container>
                     {modalHandle === true ? null : <Header>BOOKUS</Header>}
-                    {isLogin ? null : <ProfileBox>로그인해주세요</ProfileBox>}
+                    {isLogin ? null : <ProfileBox onClick={isLogin ? onClickProfile : showModal}>로그인해주세요</ProfileBox>}
                     <Profile>
                         <img src={profileLoginImg} alt="profile" onClick={isLogin ? onClickProfile : showModal} style={{ width: '35px' }} />
                     </Profile>
@@ -219,7 +219,7 @@ const Mylibrary = () => {
 
                                     if (index === bookData?.length) {
                                         return (
-                                            <PlusLi key={index}>
+                                            <PlusLi key={`plus-${index}`}>
                                                 <PlusBox>
                                                     {isLogin ? (
                                                         <Link to="/booksearch">
@@ -244,7 +244,7 @@ const Mylibrary = () => {
                                             </BookLi>
                                         );
                                     } else {
-                                        return <EmptyLi key={index}></EmptyLi>;
+                                        return <EmptyLi key={`empty-${index}`}></EmptyLi>;
                                     }
                                 })}
                             </BookUl>
