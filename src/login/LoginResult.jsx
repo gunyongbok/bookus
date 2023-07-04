@@ -25,7 +25,7 @@ const Main = styled.div`
     align-items: center;
     flex-direction: column;
     position: relative;
-    top: 100px;
+    top: 150px;
 `;
 
 const Header = styled.header`
@@ -43,16 +43,11 @@ const WelcomeUser = styled.div`
     width: 100%;
 `;
 
-const UserName = styled.h3`
-    font-weight: 600;
-    font-size: 13px;
-`;
-
 const FirstLRow = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 13px;
+    font-size: 18px;
 `;
 
 const SecondLRow = styled.div`
@@ -60,6 +55,7 @@ const SecondLRow = styled.div`
     justify-content: center;
     align-items: center;
     font-size: 13px;
+    font-size: 17px;
 `;
 
 const RollIn = styled.div`
@@ -75,6 +71,7 @@ const RollIn = styled.div`
     position: relative;
     top: 30px;
     left: 60px;
+    font-size: 13px;
 `;
 
 const StyledLink = styled(Link)`

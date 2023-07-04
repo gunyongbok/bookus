@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Container = styled.div`
     width: 100%;
-    height: 100%;
+    height: 105%;
     position: absolute;
     z-index: 2;
     top: 50%;
@@ -22,6 +22,8 @@ const Close = styled.button`
     right: 10px;
     top: 10px;
     z-index: 999;
+    border: none;
+    font-size: large;
 `;
 
 const Main = styled.div`

@@ -184,15 +184,15 @@ const BookReportDate = styled.div`
 `;
 
 const BookReportTitle1 = styled.div`
-    width: 40%;
     height: 100%;
     margin-top: 5px;
     font-size: 16px;
     font-weight: 500;
+    margin-left: 10px;
 `;
 
 const BookReportDelete = styled.div`
-    width: 10%;
+    margin-right: 5px;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -200,6 +200,7 @@ const BookReportDelete = styled.div`
 `;
 
 const Storage = () => {
+    const navigate = useNavigate();
     const { state } = useLocation();
     const { id } = useParams();
     const [bookData, setBookData] = useState([]);
@@ -295,13 +296,13 @@ const Storage = () => {
                                         );
                                     } else if (data) {
                                         return (
-                                            <BookReportLi key={index} bookReportId={data.bookReportId}>
-                                                <BookReportBox>
+                                            <BookReportLi>
+                                                <BookReportBox onClick={() => navigate(`/bookreportresult/${data.bookReportId}`, { state: data })} key={index} bookReportId={data.bookReportId}>
                                                     <BookReportDate>{`${data['startPage']} - ${data['endPage']} p`}</BookReportDate>
                                                     <BookReportDate>{data['startDate']}</BookReportDate>
                                                     <BookReportTitle1>{data['title']}</BookReportTitle1>
-                                                    <BookReportDelete onClick={() => deleteBookReport(data.bookReportId)}>❌</BookReportDelete>
                                                 </BookReportBox>
+                                                <BookReportDelete onClick={() => deleteBookReport(data.bookReportId)}>❌</BookReportDelete>
                                             </BookReportLi>
                                         );
                                     } else {

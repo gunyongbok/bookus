@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { BsList } from 'react-icons/bs';
 import { AiOutlineSave } from 'react-icons/ai';
@@ -203,6 +203,7 @@ const BookReport = () => {
     const [contents, setContents] = useState('');
     const [startPage, setStartPage] = useState('');
     const [endPage, setEndPage] = useState('');
+    const navigate = useNavigate();
 
     const handleTitle = (event) => {
         setTitle(event.target.value);

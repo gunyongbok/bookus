@@ -9,6 +9,7 @@ import BookList from './router/BookList';
 import UserProfile from './router/UserProfile';
 import BookReport from './router/BookReport';
 import Storage from './router/Storage';
+import BookReportResult from './router/BookReportResult';
 
 const Router = createBrowserRouter([
     {
@@ -39,6 +40,10 @@ const Router = createBrowserRouter([
             {
                 path: 'bookreportstorage/:id',
                 element: <Storage />,
+            },
+            {
+                path: 'bookreportresult/:bookreportid',
+                element: <BookReportResult />,
             },
             {
                 path: 'bookreport',
