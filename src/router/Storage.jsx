@@ -184,11 +184,19 @@ const BookReportDate = styled.div`
 `;
 
 const BookReportTitle1 = styled.div`
-    width: 50%;
+    width: 40%;
     height: 100%;
     margin-top: 5px;
     font-size: 16px;
     font-weight: 500;
+`;
+
+const BookReportDelete = styled.div`
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
 `;
 
 const Storage = () => {
@@ -219,11 +227,29 @@ const Storage = () => {
             });
     };
 
+    const deleteBookReport = (bookReportId) => {
+        const accessTokenHeader = localStorage.getItem('accessToken');
+        const options = {
+            headers: {
+                'Access-token': `${accessTokenHeader}`,
+            },
+        };
+        axios
+            .put(`${process.env.REACT_APP_DEFAULT_SERVER_URL}/api/v1/report/${bookReportId}`, bookReportId, options)
+            .then((response) => {
+                console.log(response);
+                setBookData((prevBookData) => prevBookData.filter((data) => data.bookReportId !== bookReportId));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     useEffect(() => {
         getBookReport();
     }, []);
 
-    console.log(state);
+    console.log(bookData);
 
     const MAX_BOOKS = 7;
 
@@ -269,11 +295,12 @@ const Storage = () => {
                                         );
                                     } else if (data) {
                                         return (
-                                            <BookReportLi key={index}>
+                                            <BookReportLi key={index} bookReportId={data.bookReportId}>
                                                 <BookReportBox>
                                                     <BookReportDate>{`${data['startPage']} - ${data['endPage']} p`}</BookReportDate>
                                                     <BookReportDate>{data['startDate']}</BookReportDate>
                                                     <BookReportTitle1>{data['title']}</BookReportTitle1>
+                                                    <BookReportDelete onClick={() => deleteBookReport(data.bookReportId)}>❌</BookReportDelete>
                                                 </BookReportBox>
                                             </BookReportLi>
                                         );

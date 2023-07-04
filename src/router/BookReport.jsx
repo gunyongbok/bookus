@@ -219,7 +219,6 @@ const BookReport = () => {
     const handleStartPage = (event) => {
         setStartPage(event.target.value);
     };
-
     const handleEndPage = (event) => {
         setEndPage(event.target.value);
     };
